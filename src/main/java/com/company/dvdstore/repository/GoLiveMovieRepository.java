@@ -19,7 +19,7 @@ public class GoLiveMovieRepository {
         FileWriter fileWriter;
         try {
             fileWriter = new FileWriter("C:\\movies\\movies.txt", true);
-            fileWriter.write(movie.getTitle());
+            fileWriter.write(movie.getTitle() + "\r\n");
             fileWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
