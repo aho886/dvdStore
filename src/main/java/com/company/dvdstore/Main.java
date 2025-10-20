@@ -1,9 +1,12 @@
 package com.company.dvdstore;
 
 import com.company.dvdstore.controller.MovieController;
+import com.company.dvdstore.controller.MovieControllerConsole;
 import com.company.dvdstore.entity.Movie;
 import com.company.dvdstore.repository.GoLiveMovieRepository;
+import com.company.dvdstore.repository.MovieRepository;
 import com.company.dvdstore.service.MovieService;
+import com.company.dvdstore.service.MovieServiceConsole;
 
 import java.util.Scanner;
 
@@ -11,14 +14,15 @@ public class Main {
     public static void main(String[] args) {
         GoLiveMovieRepository goLiveMovieRepository = new GoLiveMovieRepository();
         MovieService movieService = new MovieService(goLiveMovieRepository);
+        MovieController movieController = new MovieController(movieService);
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Entrez le nom d'un film : ");
-        String name = scanner.nextLine();
-        Movie movie = new Movie();
-        movie.setTitle(name);
+        MovieRepository movieRepository = new MovieRepository();
+        MovieServiceConsole movieServiceConsole = new MovieServiceConsole(movieRepository);
+        MovieControllerConsole movieControllerConsole = new MovieControllerConsole(movieServiceConsole);
 
-        movieService.registerMovie(movie);
+        movieControllerConsole.addMovieConsole();
+        movieController.addMovie();
+
 
 
     }
